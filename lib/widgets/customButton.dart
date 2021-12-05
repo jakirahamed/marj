@@ -4,8 +4,8 @@ import 'package:marj/const/Appscolor.dart';
 
 Widget customButton(String buttontext,onPressed) {
   return SizedBox(
-    width: 1.sw,
-    height: 56.h,
+    width: 350.w,
+    height: 50.h,
     child: ElevatedButton(
       onPressed: onPressed,
       child: Text(
@@ -13,7 +13,7 @@ Widget customButton(String buttontext,onPressed) {
         style: TextStyle(fontSize: 18.sp),
       ),
       style: ElevatedButton.styleFrom(
-          primary: AppColors.deep_orange, elevation: 3),
+          primary: AppColors.deep_orange, elevation: 2),
     ),
   );
 }

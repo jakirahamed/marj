@@ -17,6 +17,7 @@ class Home extends StatelessWidget {
         ),
         drawer: Drawer(),
         body: ListView(children: [
+          
           SizedBox(
             height: 200.0,
             width: double.infinity,
@@ -53,17 +54,21 @@ class Home extends StatelessWidget {
                 cardimg("https://cdn.pixabay.com/photo/2018/03/19/18/20/tea-time-3240766_960_720.jpg", 'text'),
                 cardimg('https://cdn.pixabay.com/photo/2015/11/19/21/10/glasses-1052010_960_720.jpg', 'text'),
                 cardimg("https://cdn.pixabay.com/photo/2018/03/19/18/20/tea-time-3240766_960_720.jpg", 'text'),
-
+            
                 ],
               ),
             ),
           ),
           categoriesButton('Check All Latest', (){}, 'See All'),
-         
+          
         ]));
   }
 }
 
+
+
+
+// ignore: non_constant_identifier_names
 Widget cardimg (String Url,String text){
   return Card(
                   elevation: 1,

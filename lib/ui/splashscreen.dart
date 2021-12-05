@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:marj/ui/signup.dart';
 
-import 'bottom_nav_controller.dart';
 
 class Splashscreen extends StatefulWidget {
   const Splashscreen({ Key? key }) : super(key: key);
@@ -14,7 +14,7 @@ class Splashscreen extends StatefulWidget {
 class _SplashscreenState extends State<Splashscreen> {
   @override
   void initState() {
-    Timer(Duration(seconds: 3), ()=>Navigator.push(context, MaterialPageRoute(builder: (_)=>BottomNavController())));
+    Timer(Duration(seconds: 4), ()=>Navigator.push(context, MaterialPageRoute(builder: (_)=>Signup())));
     super.initState();
   }
   @override

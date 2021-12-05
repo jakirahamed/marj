@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-Widget categoriesButton(String text,onPressed, String see_all) {
+Widget categoriesButton(String text,onPressed, String seeAll) {
   return Padding(
     padding: const EdgeInsets.fromLTRB(10, 10, 0, 0),
     child: Row(
@@ -18,7 +18,7 @@ Widget categoriesButton(String text,onPressed, String see_all) {
               elevation: 0.3,
               color: Colors.white,
               onPressed: onPressed,
-              child: Text(see_all)),
+              child: Text(seeAll)),
         ),
       ],
     ),
