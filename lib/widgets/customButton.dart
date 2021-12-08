@@ -8,7 +8,7 @@ Widget customButton(String buttontext,onPressed) {
     height: 50.h,
     child: ElevatedButton(
       onPressed: onPressed,
-      child: Text(
+      child : Text(
         buttontext,
         style: TextStyle(fontSize: 18.sp),
       ),

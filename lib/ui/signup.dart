@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:marj/const/Appscolor.dart';
 import 'package:marj/ui/Userform.dart';
 import 'package:marj/ui/login.dart';
 import 'package:marj/widgets/customButton.dart';
@@ -21,11 +22,13 @@ class Signup extends StatefulWidget {
 class _SignupState extends State<Signup> {
   TextEditingController _nameController = TextEditingController();
 
+  TextEditingController _phoneNumber = TextEditingController();
+
   TextEditingController _emailController = TextEditingController();
 
   TextEditingController _passwordController = TextEditingController();
 
-  TextEditingController _confirmpasswordController = TextEditingController();
+
 
   signUp() async {
     try {
@@ -54,7 +57,7 @@ class _SignupState extends State<Signup> {
       print(e);
     }
   }
-
+  final _formkey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,109 +68,209 @@ class _SignupState extends State<Signup> {
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
           child: ListView(
             children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    height: 70.h,
-                  ),
-                  Text(
-                    'Sign Up',
-                    style:
+              Form(
+                key: _formkey,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        height: 70.h,
+                      ),
+                      Text(
+                        'Sign Up',
+                        style:
                         TextStyle(fontSize: 34.sp, fontWeight: FontWeight.w600),
-                  ),
-                  SizedBox(
-                    height: 70.h,
-                  ),
-                  myTextField(
-                    'Enter Your Name',
-                    'Name',
-                    TextInputType.text,
-                    _nameController,
-                  ),
-                  SizedBox(
-                    height: 10.0,
-                  ),
-                  myTextField('Enter Your Email', 'Email',
-                      TextInputType.emailAddress, _emailController),
-                  SizedBox(
-                    height: 10.0,
-                  ),
-                  myTextField('Enter Your Password', 'Password',
-                      TextInputType.visiblePassword, _passwordController),
-                      SizedBox(
-                    height: 10.0,
-                  ),
-                      myTextField('Enter Your Password', 'Confirm password',
-                      TextInputType.visiblePassword, _confirmpasswordController),
-                  SizedBox(
-                    height: 5.h,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      TextButton(
-                          onPressed: () {
-                            Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => Login()),
-                        );
-                          },
-                          child: RichText(
-                              text: TextSpan(
-                                  text: 'Already have an account? ',
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 14.sp,
-                                      fontWeight: FontWeight.w500),
-                                  children: [
-                                TextSpan(
-                                    text: '→',
-                                    style: TextStyle(
-                                        color: Colors.orange,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 25.sp))
-                              ]))),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 25.h,
-                  ),
-                  customButton('Sign Up', () {
-                    signUp();
-                  }),
-                  SizedBox(
-                    height: 120.h,
-                  ),
-                  Center(
-                      child: Text('Or sign up with social account',
-                          style: TextStyle(
-                              fontSize: 14.sp, fontWeight: FontWeight.w400))),
-                  SizedBox(
-                    height: 20.h,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Container(
-                        child: Image.network(
-                            'https://i.ibb.co/C11DhdN/google.png'),
-                        height: 30.h,
-                        width: 30.w,
                       ),
                       SizedBox(
-                        width: 50.w,
+                        height: 70.h,
                       ),
-                      Container(
-                        child: Image.network(
-                            'https://i.ibb.co/GkqSptB/facebook.png'),
-                        height: 30.h,
-                        width: 30.w,
+                      TextFormField(
+                        decoration: InputDecoration(
+                          labelText: 'Enter Your name'
+                        ),
+                        validator: (value){
+                          if (value!.isEmpty ||!RegExp(r'^[a-z A-Z]+$').hasMatch(value!)){
+                            return "Enter Correct name";
+                          }else{
+                            return null;
+                          }
+                        },
                       ),
+                      SizedBox(
+                        height: 10.0,
+                      ),
+                      TextFormField(
+                        decoration: InputDecoration(
+                          labelText: 'Enter Your Phone Number'
+                        ),
+                        validator: (value){
+                          if (value!.isEmpty ||!RegExp(r"^(?:\+?88|0088)?01[15-9]\d{8}$").hasMatch(value!)){
+                            return "Enter Correct Phone Number";
+                          }else{
+                            return null;
+                          }
+                        },
+                      ),
+                      SizedBox(
+                        height: 10.0,
+                      ),
+                      TextFormField(
+                        decoration: InputDecoration(
+                          labelText: 'Enter Your Email'
+                        ),
+                        validator: (value){
+                          if (value!.isEmpty ||!RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(value!)){
+                            return "Enter Correct Email";
+                          }else{
+                            return null;
+                          }
+                        },
+                      ),
+                      SizedBox(
+                        height: 10.0,
+                      ),
+                      TextFormField(
+                        decoration: InputDecoration(
+                          labelText: 'Enter Your Password'
+                        ),
+                        validator: (value){
+                          if (value!.isEmpty ||!RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{6,}$').hasMatch(value!)){
+                            return "Enter Correct Password";
+                          }else{
+                            return null;
+                          }
+                        },
+                      ),
+                      SizedBox(
+                        height: 10.0,
+                      ),
+
                     ],
-                  )
+                  )),
+              Row(
+                children: [
+                  Expanded(
+                    child: ElevatedButton(
+                      onPressed: (){
+                        if (_formkey.currentState!.validate()){
+                          final snackBar = SnackBar(content: Text('Submitting form'));
+
+                        }
+                      },
+                      child : Text('Sign Up',
+                        style: TextStyle(fontSize: 18.sp),
+                      ),
+                      style: ElevatedButton.styleFrom(
+                          primary: AppColors.deep_orange, elevation: 2),
+                    ),
+                  ),
                 ],
-              ),
+              )
+              // Column(
+              //   crossAxisAlignment: CrossAxisAlignment.start,
+              //   children: [
+
+                  // SizedBox(
+                  //   height: 70.h,
+                  // ),
+                  // Text(
+                  //   'Sign Up',
+                  //   style:
+                  //       TextStyle(fontSize: 34.sp, fontWeight: FontWeight.w600),
+                  // ),
+                  // SizedBox(
+                  //   height: 70.h,
+                  // ),
+                  // myTextField(
+                  //   'Enter Your Name',
+                  //   'Name',
+                  //   TextInputType.text,
+                  //   _nameController,
+                  // ),
+                  // SizedBox(
+                  //   height: 10.0,
+                  // ),
+                  // myTextField('Enter Your Email', 'Email',
+                  //     TextInputType.emailAddress, _emailController),
+                  // SizedBox(
+                  //   height: 10.0,
+                  // ),
+                  // myTextField('Enter Your Password', 'Password',
+                  //     TextInputType.visiblePassword, _passwordController),
+                  //     SizedBox(
+                  //   height: 10.0,
+                  // ),
+                  //     myTextField('Enter Your Password', 'Confirm password',
+                  //     TextInputType.visiblePassword, _confirmpasswordController),
+                  // SizedBox(
+                  //   height: 5.h,
+                  // ),
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.end,
+                  //   children: [
+                  //     TextButton(
+                  //         onPressed: () {
+                  //           Navigator.push(
+                  //         context,
+                  //         MaterialPageRoute(builder: (context) => Login()),
+                  //       );
+                  //         },
+                  //         child: RichText(
+                  //             text: TextSpan(
+                  //                 text: 'Already have an account? ',
+                  //                 style: TextStyle(
+                  //                     color: Colors.black,
+                  //                     fontSize: 14.sp,
+                  //                     fontWeight: FontWeight.w500),
+                  //                 children: [
+                  //               TextSpan(
+                  //                   text: '→',
+                  //                   style: TextStyle(
+                  //                       color: Colors.orange,
+                  //                       fontWeight: FontWeight.bold,
+                  //                       fontSize: 25.sp))
+                  //             ]))),
+                  //   ],
+                  // ),
+                  // SizedBox(
+                  //   height: 25.h,
+                  // ),
+                  // customButton('Sign Up', () {
+                  //   signUp();
+                  // }),
+                  // SizedBox(
+                  //   height: 120.h,
+                  // ),
+                  // Center(
+                  //     child: Text('Or sign up with social account',
+                  //         style: TextStyle(
+                  //             fontSize: 14.sp, fontWeight: FontWeight.w400))),
+                  // SizedBox(
+                  //   height: 20.h,
+                  // ),
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.center,
+                  //   children: [
+                  //     Container(
+                  //       child: Image.network(
+                  //           'https://i.ibb.co/C11DhdN/google.png'),
+                  //       height: 30.h,
+                  //       width: 30.w,
+                  //     ),
+                  //     SizedBox(
+                  //       width: 50.w,
+                  //     ),
+                  //     Container(
+                  //       child: Image.network(
+                  //           'https://i.ibb.co/GkqSptB/facebook.png'),
+                  //       height: 30.h,
+                  //       width: 30.w,
+                  //     ),
+                  //   ],
+                  // ),
+                  //
+              //   ],
+              // ),
             ],
           ),
         )),
