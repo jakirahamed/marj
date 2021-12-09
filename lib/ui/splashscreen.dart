@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:marj/ui/signup.dart';
+import 'package:marj/ui/login.dart';
 
 
 class Splashscreen extends StatefulWidget {
@@ -14,7 +14,7 @@ class Splashscreen extends StatefulWidget {
 class _SplashscreenState extends State<Splashscreen> {
   @override
   void initState() {
-    Timer(Duration(seconds: 4), ()=>Navigator.push(context, MaterialPageRoute(builder: (_)=>Signup())));
+    Timer(Duration(seconds: 4), ()=>Navigator.push(context, MaterialPageRoute(builder: (_)=>Login())));
     super.initState();
   }
   @override

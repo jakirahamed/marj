@@ -7,6 +7,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:marj/ui/bottom_nav_controller.dart';
 import 'package:marj/ui/bottom_nav_pages/home.dart';
 import 'package:marj/ui/forgotpassword.dart';
+import 'package:marj/ui/signup.dart';
 import 'package:marj/widgets/customButton.dart';
 import 'package:marj/widgets/myTextField.dart';
 
@@ -14,6 +15,7 @@ class Login extends StatefulWidget {
 
   @override
   _LoginState createState() => _LoginState();
+
 }
 
 class _LoginState extends State<Login> {
@@ -43,11 +45,18 @@ class _LoginState extends State<Login> {
       } else if (e.code == 'email-already-in-use') {
         Fluttertoast.showToast(msg: 'The account already exists for that email.');
 
+
       }
     } catch (e) {
       print(e);
     }
   }
+
+
+
+  bool _passwordVisible = false;
+  final _formkey = GlobalKey<FormState>();
+
 
   @override
   Widget build(BuildContext context) {
@@ -76,18 +85,70 @@ class _LoginState extends State<Login> {
                   SizedBox(
                     height: 10.0,
                   ),
-                  myTextField('Enter Your Email', 'Email',
-                      TextInputType.emailAddress, _emailController),
-                  SizedBox(
-                    height: 10.0,
+                  Form(
+                      key: _formkey,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          TextFormField(
+                            keyboardType: TextInputType.emailAddress,
+                            controller: _emailController,
+                            decoration: InputDecoration(
+                                suffixIcon: Icon(Icons.mail),
+                                contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+                                labelText: 'Enter Your Email',
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                )
+                            ),
+                            validator: (value){
+                              if (value!.isEmpty ||!RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(value!)){
+                                return "Enter Correct Email";
+                              }else{
+                                return null;
+                              }
+                            },
+                          ),
+                          SizedBox(
+                            height: 10.0,
+                          ),
+                          TextFormField(
+                            keyboardType: TextInputType.text,
+                            controller: _passwordController,
+                            obscureText: !_passwordVisible,
+                            decoration: InputDecoration(
+                                suffixIcon: IconButton(
+                                  icon: Icon(
+                                    _passwordVisible
+                                    ? Icons.visibility
+                                        : Icons.visibility_off,
+                                  ),
+                                  onPressed: (){
+                                    setState(() {
+                                      _passwordVisible = !_passwordVisible;
+                                    });
+                                  },
+                                ),
+                                contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+                                labelText: 'Enter Your Password',
+                                border: OutlineInputBorder(borderRadius: BorderRadius.circular(10),
+                                )
+                            ),
+                            validator: (value){
+                              if (value!.isEmpty ||!RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{6,}$').hasMatch(value!)){
+                                return "Enter Correct Password";
+                              }else{
+                                return null;
+                              }
+                            },
+                          ),
+                          SizedBox(
+                            height: 10.0,
+                          ),
+                        ],
+                      )
                   ),
-                  myTextField(
 
-                    'Enter Your Password', 'Password',
-                      TextInputType.visiblePassword, _passwordController),
-                  SizedBox(
-                    height: 5.h,
-                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
@@ -95,24 +156,28 @@ class _LoginState extends State<Login> {
                           onPressed: () {
                             Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => ForgotPassword()),
+                          MaterialPageRoute(builder: (context) => Signup()),
                         );
                           },
-                          child: RichText(
-                              text: TextSpan(
-                                  text: 'Forgot your password? ',
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 14.sp,
-                                      fontWeight: FontWeight.w500),
-                                  children: [
+                        child: RichText(
+
+                          text: TextSpan(
+                              text: 'Don’t have a account? Register ',
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 14.sp,
+                                  fontWeight: FontWeight.w500),
+                              children: [
                                 TextSpan(
                                     text: '→',
                                     style: TextStyle(
                                         color: Colors.orange,
                                         fontWeight: FontWeight.bold,
                                         fontSize: 25.sp))
-                              ]))),
+                              ]
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                   SizedBox(

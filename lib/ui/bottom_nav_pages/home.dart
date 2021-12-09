@@ -13,7 +13,7 @@ class Home extends StatelessWidget {
         appBar: AppBar(
           title: Text('marj'),
           centerTitle: true,
-          automaticallyImplyLeading: false,
+          // automaticallyImplyLeading: false,
         ),
         drawer: Drawer(),
         body: ListView(children: [
@@ -50,7 +50,7 @@ class Home extends StatelessWidget {
               padding: const EdgeInsets.fromLTRB(10.0, 0.0, 0.0, 0.0),
               child: Row(
                 children: [
-                  cardimg('https://cdn.pixabay.com/photo/2015/11/19/21/10/glasses-1052010_960_720.jpg', 'text'),
+                cardimg('https://cdn.pixabay.com/photo/2015/11/19/21/10/glasses-1052010_960_720.jpg', 'text'),
                 cardimg("https://cdn.pixabay.com/photo/2018/03/19/18/20/tea-time-3240766_960_720.jpg", 'text'),
                 cardimg('https://cdn.pixabay.com/photo/2015/11/19/21/10/glasses-1052010_960_720.jpg', 'text'),
                 cardimg("https://cdn.pixabay.com/photo/2018/03/19/18/20/tea-time-3240766_960_720.jpg", 'text'),

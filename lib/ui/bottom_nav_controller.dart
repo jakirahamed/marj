@@ -13,7 +13,7 @@ class BottomNavController extends StatefulWidget {
 }
 
 class _BottomNavControllerState extends State<BottomNavController> {
-  bool navBarMode = false;
+  // bool navBarMode = false;
 
   final _pages = [
     Home(),
